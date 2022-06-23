@@ -1,10 +1,8 @@
 import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import Time from "../Time";
+import { Time, CheckedIcon } from "../";
 
-import { ReactComponent as Checked } from "assets/img/check.svg";
-import { ReactComponent as NoChecked } from "assets/img/nocheck.svg";
 import "./Message.scss";
 
 const Message = ({
@@ -59,11 +57,12 @@ const Message = ({
         </div>
       </div>
       <div className="message__checked">
-        {isMe && isReaded ? (
+        <CheckedIcon isMe={isMe} isReaded={isReaded} />
+        {/* {isMe && isReaded ? (
           <Checked fill="#25ADFF" style={{ width: "20px" }} />
         ) : (
           <NoChecked style={{ width: "20px" }} />
-        )}
+        )} */}
       </div>
     </div>
   );
@@ -78,6 +77,8 @@ Message.propTypes = {
   date: PropTypes.object,
   text: PropTypes.string,
   user: PropTypes.object,
+  isMe: PropTypes.bool,
+  isReaded: PropTypes.bool,
   isTyping: PropTypes.bool,
 };
 

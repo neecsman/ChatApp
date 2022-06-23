@@ -1,10 +1,19 @@
 import React from "react";
 
-import { DialogItem } from "components";
+import { Message, DialogItem } from "components";
 const Home = () => {
   return (
     <section>
-      <DialogItem />
+      <div className="dialogs">
+        <DialogItem
+          user={{
+            fullname: "Федор Достоевский",
+            isOnline: true,
+          }}
+          unreaded={1}
+        />
+      </div>
+
       {/* <Dialogs
         items={[
           {
@@ -20,8 +29,8 @@ const Home = () => {
           },
         ]}
       /> */}
-
-      {/* <Message
+      {/* 
+      <Message
         avatar="https://sun1-14.userapi.com/s/v1/if1/eEzYHZfhvKfU7DdcuQ802HRHjMU88BpdnirqnxsJh96U4HniroO5Tfe_FKLNIn07qPlF56Gt.jpg?size=100x100&quality=96&crop=0,0,300,300&ava=1"
         text="Привет как дела что нового что уже сделано и как это работает покажи те мен"
         date={new Date("Fri Jun 17 2022 11:07:59")}
