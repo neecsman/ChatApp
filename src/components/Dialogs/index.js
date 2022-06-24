@@ -1,16 +1,13 @@
 import React from "react";
+import { orderBy } from "lodash";
 import { DialogItem } from "../";
 
-const Dialogs = ({ items }) => {
+const Dialogs = ({ items, userId }) => {
   return (
     <div className="dialogs">
-      <DialogItem
-        user={{
-          fullname: "Федор Достоевский",
-          isOnline: true,
-        }}
-        unreaded={1}
-      />
+      {orderBy(items, ["createdAt"], ["desc"]).map((item) => (
+        <DialogItem key={item._id} isMe={item.user._id === userId} {...item} />
+      ))}
     </div>
   );
 };

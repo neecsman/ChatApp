@@ -6,6 +6,6 @@ const Time = ({ date }) =>
   formatDistanceToNow(date, { locale: ru, addSuffix: true });
 
 Time.propTypes = {
-  date: PropTypes.string,
+  date: PropTypes.object,
 };
 export default Time;

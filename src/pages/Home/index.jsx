@@ -1,34 +1,37 @@
 import React from "react";
 
-import { Message, DialogItem } from "components";
+import { Message, Dialogs } from "components";
 const Home = () => {
   return (
     <section>
-      <div className="dialogs">
-        <DialogItem
-          user={{
-            fullname: "Федор Достоевский",
-            isOnline: true,
-          }}
-          unreaded={1}
-        />
-      </div>
-
-      {/* <Dialogs
+      <Dialogs
+        userID={0}
         items={[
           {
+            _id: Math.random(),
+            text: "Мы все свидетельствуем Вам глубочайшее наше почтение и целуем Ваши ручки",
+            isReaded: false,
+            createdAt: "Fri Jun 23 2022 13:12:31",
             user: {
+              _id: 1,
               fullname: "Федор Достоевский",
               avatar: null,
             },
-            message: {
-              text: "Мы все свидетельствуем Вам глубочайшее наше почтение и целуем Ваши ручки",
-              isReaded: false,
-              createdAt: new Date();
+          },
+          {
+            _id: Math.random(),
+            text: "Привет! Как дела?",
+            isReaded: true,
+            createdAt: "Fri Jun 24 2022 13:12:31",
+            user: {
+              _id: 1,
+              fullname: "Джеймс Хэтфилд",
+              avatar:
+                "https://avatars.mds.yandex.net/i?id=2a0000017a015fde477a8d0496cdfe417b0c-4884508-images-thumbs&n=13",
             },
           },
         ]}
-      /> */}
+      />
       {/* 
       <Message
         avatar="https://sun1-14.userapi.com/s/v1/if1/eEzYHZfhvKfU7DdcuQ802HRHjMU88BpdnirqnxsJh96U4HniroO5Tfe_FKLNIn07qPlF56Gt.jpg?size=100x100&quality=96&crop=0,0,300,300&ava=1"
@@ -69,6 +72,12 @@ const Home = () => {
         avatar="https://sun1-14.userapi.com/s/v1/if1/eEzYHZfhvKfU7DdcuQ802HRHjMU88BpdnirqnxsJh96U4HniroO5Tfe_FKLNIn07qPlF56Gt.jpg?size=100x100&quality=96&crop=0,0,300,300&ava=1"
         isTyping
       /> */}
+
+      <Message
+        avatar="https://sun1-14.userapi.com/s/v1/if1/eEzYHZfhvKfU7DdcuQ802HRHjMU88BpdnirqnxsJh96U4HniroO5Tfe_FKLNIn07qPlF56Gt.jpg?size=100x100&quality=96&crop=0,0,300,300&ava=1"
+        date={new Date("Fri Jun 17 2022 11:07:59")}
+        audio="https://zvukipro.com/uploads/files/2022-05/1651398484_1393565345543.mp3"
+      />
     </section>
   );
 };
