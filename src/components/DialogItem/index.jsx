@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import { format, isToday } from "date-fns";
-import { CheckedIcon } from "../";
+import { CheckedIcon, Avatar } from "../";
 
 import "./DialogItem.scss";
 
@@ -9,20 +9,7 @@ const getMessageTime = (createdAt) => {
   if (isToday(new Date(createdAt))) {
     return format(new Date(createdAt), "HH:mm");
   } else {
-    return format(new Date(createdAt), "dd.mm.yyyy");
-  }
-};
-
-const getAvatar = (avatar) => {
-  if (avatar) {
-    return <img src={avatar} alt="" />;
-  } else {
-    return (
-      <img
-        src="https://sun1-14.userapi.com/s/v1/if1/eEzYHZfhvKfU7DdcuQ802HRHjMU88BpdnirqnxsJh96U4HniroO5Tfe_FKLNIn07qPlF56Gt.jpg?size=100x100&quality=96&crop=0,0,300,300&ava=1"
-        alt=""
-      />
-    );
+    return format(new Date(createdAt), "dd.MM.yyyy");
   }
 };
 
@@ -34,7 +21,8 @@ const DialogItem = ({ user, text, createdAt, unreaded, isMe }) => {
       })}
     >
       <div className="dialogs__item-avatar">
-        {getAvatar(user.avatar)}
+        <Avatar user={user} />
+        {/* {getAvatar(user.avatar)} */}
         {/* <img src={user.avatar} alt={`${user.fullname}`} /> */}
         {/* <img
           src="https://sun1-14.userapi.com/s/v1/if1/eEzYHZfhvKfU7DdcuQ802HRHjMU88BpdnirqnxsJh96U4HniroO5Tfe_FKLNIn07qPlF56Gt.jpg?size=100x100&quality=96&crop=0,0,300,300&ava=1"

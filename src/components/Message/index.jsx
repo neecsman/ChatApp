@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { convertCurrentTime } from "utils/helpers";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import { Time, CheckedIcon } from "../";
@@ -8,6 +9,67 @@ import play from "assets/img/play.svg";
 import pause from "assets/img/pause.svg";
 
 import "./Message.scss";
+
+const MessageAudio = ({ audioSrc }) => {
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+
+  const togglePlay = () => {
+    !isPlaying ? audioRef.current.play() : audioRef.current.pause();
+  };
+
+  useEffect(() => {
+    audioRef.current.addEventListener("loadedmetadata", () => {
+      setCurrentTime(audioRef.current.duration);
+    });
+
+    audioRef.current.addEventListener("playing", () => {
+      setIsPlaying(true);
+    });
+    audioRef.current.addEventListener("ended", () => {
+      setIsPlaying(false);
+      setProgress(0);
+      setCurrentTime(0);
+    });
+    audioRef.current.addEventListener("pause", () => {
+      setIsPlaying(false);
+    });
+
+    audioRef.current.addEventListener("timeupdate", () => {
+      const duration = (audioRef.current && audioRef.current.duration) || 0;
+      setCurrentTime(audioRef.current.currentTime);
+      setProgress((audioRef.current.currentTime / duration) * 100);
+    });
+  }, []);
+  return (
+    <div className="message__audio">
+      <audio ref={audioRef} src={audioSrc} preload="auto" />
+      <div
+        className="message__audio-progress"
+        style={{ width: progress + "%" }}
+      ></div>
+      <div className="message__audio-info">
+        <div className="message__audio-btn">
+          <button onClick={togglePlay}>
+            {isPlaying ? (
+              <img src={pause} alt="pause" />
+            ) : (
+              <img src={play} alt="play" />
+            )}
+          </button>
+        </div>
+        <div className="message__audio-wave">
+          <img src={wave} alt="Wave" />
+        </div>
+        <span className="message__audio-duration">
+          {convertCurrentTime(currentTime)}
+        </span>
+      </div>
+    </div>
+  );
+};
 
 const Message = ({
   avatar,
@@ -20,8 +82,6 @@ const Message = ({
   attachments,
   isTyping,
 }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-
   return (
     <div
       className={classNames("message", {
@@ -45,26 +105,7 @@ const Message = ({
                 <span />
               </div>
             )}
-            {audio && (
-              <div className="message__audio">
-                <div className="message__audio-progress"></div>
-                <div className="message__audio-info">
-                  <div className="message__audio-btn">
-                    <button>
-                      {isPlaying ? (
-                        <img src={pause} alt="pause" />
-                      ) : (
-                        <img src={play} alt="play" />
-                      )}
-                    </button>
-                  </div>
-                  <div className="message__audio-wave">
-                    <img src={wave} alt="Wave" />
-                  </div>
-                  <span className="message__audio-duration">00:19</span>
-                </div>
-              </div>
-            )}
+            {audio && <MessageAudio audioSrc={audio} />}
           </div>
         )}
 

@@ -1,19 +1,33 @@
 import React from "react";
+import { TeamOutlined, FormOutlined } from "@ant-design/icons";
 
 import { Message, Dialogs } from "components";
 const Home = () => {
   return (
-    <section>
-      <Dialogs
+    <section className="home">
+      <div className="chat">
+        <div className="chat__sidebar">
+          <div className="chat__sidebar-header">
+            <div>
+              <TeamOutlined />
+              <span>Список диалогов</span>
+            </div>
+            <FormOutlined />
+          </div>
+          <div className="chat__sidebar-search"></div>
+        </div>
+        <div className="chat__dialogs"></div>
+      </div>
+      {/* <Dialogs
         userID={0}
         items={[
           {
-            _id: Math.random(),
+            _id: "365cc0d1614e2ddb4aeda0993412123e",
             text: "Мы все свидетельствуем Вам глубочайшее наше почтение и целуем Ваши ручки",
             isReaded: false,
-            createdAt: "Fri Jun 23 2022 13:12:31",
+            createdAt: "Tue Jun 03 2022 14:35:58",
             user: {
-              _id: 1,
+              _id: "365cc0d1614e2ddb4aeda0993412123e",
               fullname: "Федор Достоевский",
               avatar: null,
             },
@@ -22,16 +36,16 @@ const Home = () => {
             _id: Math.random(),
             text: "Привет! Как дела?",
             isReaded: true,
-            createdAt: "Fri Jun 24 2022 13:12:31",
+            createdAt: "Tue Jun 04 2022 12:36:58",
             user: {
-              _id: 1,
+              _id: "365cc0d1614e2ddb4aeda0993412123e",
               fullname: "Джеймс Хэтфилд",
               avatar:
                 "https://avatars.mds.yandex.net/i?id=2a0000017a015fde477a8d0496cdfe417b0c-4884508-images-thumbs&n=13",
             },
           },
         ]}
-      />
+      /> */}
       {/* 
       <Message
         avatar="https://sun1-14.userapi.com/s/v1/if1/eEzYHZfhvKfU7DdcuQ802HRHjMU88BpdnirqnxsJh96U4HniroO5Tfe_FKLNIn07qPlF56Gt.jpg?size=100x100&quality=96&crop=0,0,300,300&ava=1"
@@ -73,11 +87,11 @@ const Home = () => {
         isTyping
       /> */}
 
-      <Message
+      {/* <Message
         avatar="https://sun1-14.userapi.com/s/v1/if1/eEzYHZfhvKfU7DdcuQ802HRHjMU88BpdnirqnxsJh96U4HniroO5Tfe_FKLNIn07qPlF56Gt.jpg?size=100x100&quality=96&crop=0,0,300,300&ava=1"
         date={new Date("Fri Jun 17 2022 11:07:59")}
         audio="https://zvukipro.com/uploads/files/2022-05/1651398484_1393565345543.mp3"
-      />
+      /> */}
     </section>
   );
 };
