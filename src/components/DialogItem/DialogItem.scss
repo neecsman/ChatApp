@@ -1,11 +1,18 @@
 @import "~styles/variables";
 
 .dialogs {
-  width: 300px;
+  height: 100%;
+  overflow: scroll;
   &__item {
     $item: &;
     display: flex;
-    margin-bottom: 20px;
+    padding: 10px 20px;
+
+    &:active,
+    &:hover {
+      background-color: #f3f7ff;
+      cursor: pointer;
+    }
     &-avatar {
       margin-right: 10px;
       img {

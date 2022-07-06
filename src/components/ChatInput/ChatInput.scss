@@ -1,0 +1,16 @@
+.chat__dialogs-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-top: 1px solid #f7f7f7;
+  span {
+    opacity: 0.5;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.4s;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
