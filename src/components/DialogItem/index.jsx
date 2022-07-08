@@ -5,15 +5,15 @@ import { CheckedIcon, Avatar } from "../";
 
 import "./DialogItem.scss";
 
-const getMessageTime = (createdAt) => {
-  if (isToday(new Date(createdAt))) {
-    return format(new Date(createdAt), "HH:mm");
+const getMessageTime = (created_at) => {
+  if (isToday(new Date(created_at))) {
+    return format(new Date(created_at), "HH:mm");
   } else {
-    return format(new Date(createdAt), "dd.MM.yyyy");
+    return format(new Date(created_at), "dd.MM.yyyy");
   }
 };
 
-const DialogItem = ({ user, text, createdAt, unreaded, isMe }) => {
+const DialogItem = ({ user, text, created_at, unreaded, isMe }) => {
   return (
     <div
       className={classNames("dialogs__item", {
@@ -32,7 +32,7 @@ const DialogItem = ({ user, text, createdAt, unreaded, isMe }) => {
       <div className="dialogs__item-info">
         <div className="dialogs__item-info-top">
           <p>{user.fullname}</p>
-          <span>{getMessageTime(createdAt)}</span>
+          <span>{getMessageTime(created_at)}</span>
         </div>
         <div className="dialogs__item-info-bottom">
           <p>{text}</p>
