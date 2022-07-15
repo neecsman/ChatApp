@@ -16,10 +16,15 @@ const dialogsSlice = createSlice({
   name: "dialogs",
   initialState: {
     dialogs: [],
+    currentDialog: null,
     status: null,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    setCurrentDialog(state, action) {
+      state.currentDialog = action.payload;
+    },
+  },
   extraReducers: {
     [fetchDialogs.pending]: (state) => {
       state.status = "loading";
@@ -33,4 +38,5 @@ const dialogsSlice = createSlice({
   },
 });
 
+export const { setCurrentDialog } = dialogsSlice.actions;
 export default dialogsSlice.reducer;

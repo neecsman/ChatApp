@@ -10,18 +10,12 @@ const Dialogs = ({ userId }) => {
   const [value, setValue] = useState("");
   const [filtered, setFiltered] = useState([...items]);
 
-  // useEffect(() => {
-  //   dispatch(fetchDialogs());
-  // }, []);
-
   useEffect(() => {
     if (!items.length) {
       dispatch(fetchDialogs());
     } else {
       setFiltered([...items]);
     }
-
-    console.log("effect");
   }, [items]);
 
   const onChangeInput = (value) => {
@@ -33,8 +27,6 @@ const Dialogs = ({ userId }) => {
     );
     setValue(value);
   };
-
-  console.log("render");
 
   return (
     <BaseDialogs

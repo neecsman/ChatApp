@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { setCurrentDialog } from "../../redux/dialogsSlice";
 import classNames from "classnames";
 import { format, isToday } from "date-fns";
 import { CheckedIcon, Avatar } from "../";
@@ -13,12 +15,15 @@ const getMessageTime = (created_at) => {
   }
 };
 
-const DialogItem = ({ user, text, created_at, unreaded, isMe }) => {
+const DialogItem = ({ _id, user, text, created_at, unreaded, isMe }) => {
+  const dispatch = useDispatch();
+
   return (
     <div
       className={classNames("dialogs__item", {
         "dialogs__item-online": user.isOnline,
       })}
+      onClick={() => dispatch(setCurrentDialog(_id))}
     >
       <div className="dialogs__item-avatar">
         <Avatar user={user} />

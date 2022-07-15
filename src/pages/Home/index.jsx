@@ -5,8 +5,8 @@ import {
   EllipsisOutlined,
 } from "@ant-design/icons";
 
-import { Messages, Status, ChatInput } from "components";
-import { Dialogs } from "containers";
+import { Status, ChatInput } from "components";
+import { Dialogs, Messages } from "containers";
 
 import "styles/layouts/_chat.scss";
 
