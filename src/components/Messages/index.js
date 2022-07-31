@@ -1,17 +1,23 @@
 import React from "react";
-import { Empty } from "antd";
+import { Empty, Spin } from "antd";
+
+import classNames from "classnames";
 
 import { Message } from "../";
 
-const Messages = ({ items }) => {
-  return items ? (
-    <div>
-      {items.map((item) => (
-        <Message {...item} />
-      ))}
+import "./Messages.scss";
+
+const Messages = ({ isLoading, items }) => {
+  return (
+    <div className={classNames("messages", { "messages--loading": isLoading })}>
+      {isLoading && items ? (
+        <Spin size="large" tip="Загружаю диалог..."></Spin>
+      ) : items ? (
+        items.map((item) => <Message {...item} />)
+      ) : (
+        <Empty description="Откройте диалог" />
+      )}
     </div>
-  ) : (
-    <Empty description="Откройте диалог" />
   );
 };
 

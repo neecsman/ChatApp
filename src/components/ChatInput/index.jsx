@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   SmileOutlined,
   CameraOutlined,
@@ -20,6 +20,7 @@ const ChatInput = () => {
         size="large"
         style={{ width: "80%" }}
         placeholder="Введите текст"
+        value={value}
       />
       <CameraOutlined />
       {value ? <SendOutlined /> : <AudioOutlined />}

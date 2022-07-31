@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { convertCurrentTime } from "utils/helpers";
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import { Time, CheckedIcon } from "../";
+import { Time, CheckedIcon, Avatar } from "../";
 
 import wave from "assets/img/wave.svg";
 import play from "assets/img/play.svg";
@@ -92,7 +92,7 @@ const Message = ({
       })}
     >
       <div className="message__avatar">
-        <img src={avatar} alt={`Avatar ${user.fullname}`} />
+        <Avatar user={user} />
       </div>
       <div className="message__content">
         {(audio || text || isTyping) && (

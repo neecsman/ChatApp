@@ -5,15 +5,17 @@ import { Messages as BaseMessages } from "components";
 
 const Messages = ({ userId }) => {
   const dialogId = useSelector((state) => state.dialogs.currentDialog);
-  const items = useSelector((state) => state.messages.messages);
+  const { messages, isLoading } = useSelector((state) => state.messages);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchMessages(dialogId));
-    console.log("запрос на диалог");
+    if (dialogId) {
+      dispatch(fetchMessages(dialogId));
+    }
   }, [dialogId]);
 
-  return <BaseMessages items={items} />;
+  return <BaseMessages isLoading={isLoading} items={messages} />;
 };
 
 export default Messages;
