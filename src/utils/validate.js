@@ -14,6 +14,13 @@ const validateFunc = ({ isAuth, values, errors }) => {
         errors.password = isAuth ? "Неверный пароль" : "Слишком легкий пароль";
       }
     },
+    aproved_password: (value) => {
+      if (!value) {
+        errors.aproved_password = "Подтвердите пароль";
+      } else if (values.password !== values.aproved_password) {
+        errors.aproved_password = "Пароли не совпадают";
+      }
+    },
   };
 
   Object.keys(values).forEach((key) => rules[key] && rules[key](values[key]));

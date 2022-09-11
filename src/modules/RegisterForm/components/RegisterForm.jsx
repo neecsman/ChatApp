@@ -74,12 +74,29 @@ const RegisterForm = (props) => {
                 onBlur={handleBlur}
               />
             </Form.Item>
-            <Form.Item name="Accept password">
+            <Form.Item
+              hasFeedback
+              validateStatus={
+                !touched.aproved_password
+                  ? ""
+                  : errors.aproved_password
+                  ? "error"
+                  : "success" && values.password !== values.aproved_password
+                  ? "error"
+                  : "success"
+              }
+              name="aproved_password"
+              help={!touched.aproved_password ? "" : errors.aproved_password}
+            >
               <Input
+                id="aproved_password"
                 size="large"
                 prefix={<LockOutlined className="site-form-item-icon" />}
                 type="password"
                 placeholder="Подтвердите пароль"
+                value={values.aproved_password}
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
             </Form.Item>
             <Form.Item>
