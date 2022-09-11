@@ -1,28 +1,35 @@
 import { withFormik } from "formik";
+import { connect } from "react-redux";
 import RegisterForm from "../components/RegisterForm";
 import validateFunc from "utils/validate";
+import { registration } from "../../../redux/userSlice";
 
-export default withFormik({
-  enableReinitialize: true,
-  mapPropsToValues: () => ({
-    email: "",
-    password: "",
-    aproved_password: "",
-  }),
+export default connect()(
+  withFormik({
+    enableReinitialize: true,
+    mapPropsToValues: () => ({
+      email: "",
+      password: "",
+      fullname: "",
+      aproved_password: "",
+    }),
 
-  validate: (values) => {
-    let errors = {};
-    validateFunc({ isAuth: false, values, errors });
+    validate: (values) => {
+      let errors = {};
+      validateFunc({ isAuth: false, values, errors });
 
-    return errors;
-  },
+      return errors;
+    },
 
-  handleSubmit: (values, { setSubmitting }) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
-      setSubmitting(false);
-    }, 1000);
-  },
+    handleSubmit: (values, { props, setSubmitting }) => {
+      props.dispatch(registration(values));
 
-  displayName: "RegisterForm",
-})(RegisterForm);
+      // setTimeout(() => {
+      //   alert(JSON.stringify(values, null, 2));
+      //   setSubmitting(false);
+      // }, 1000);
+    },
+
+    displayName: "RegisterForm",
+  })(RegisterForm)
+);

@@ -10,10 +10,10 @@ import {
 import { Button, Block } from "components";
 
 const RegisterForm = (props) => {
-  const success = false;
-
   const { values, touched, errors, handleChange, handleBlur, handleSubmit } =
     props;
+  const success = false;
+
   return (
     <div>
       <div className="auth__top">
@@ -50,9 +50,12 @@ const RegisterForm = (props) => {
             </Form.Item>
             <Form.Item name="username">
               <Input
+                id="fullname"
                 size="large"
                 prefix={<UserOutlined className="site-form-item-icon" />}
                 placeholder="Логин"
+                value={values.name}
+                onChange={handleChange}
               />
             </Form.Item>
             <Form.Item
