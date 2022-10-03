@@ -1,27 +1,33 @@
 import { withFormik } from "formik";
+import { connect } from "react-redux";
 import LoginForm from "../components/LoginForm";
 import validateFunc from "utils/validate";
+import { login } from "../../../redux/userSlice";
 
-export default withFormik({
-  enableReinitialize: true,
-  mapPropsToValues: () => ({
-    email: "",
-    password: "",
-  }),
+export default connect()(
+  withFormik({
+    enableReinitialize: true,
+    mapPropsToValues: () => ({
+      email: "",
+      password: "",
+    }),
 
-  validate: (values) => {
-    let errors = {};
-    validateFunc({ isAuth: true, values, errors });
+    validate: (values) => {
+      let errors = {};
+      validateFunc({ isAuth: true, values, errors });
 
-    return errors;
-  },
+      return errors;
+    },
 
-  handleSubmit: (values, { setSubmitting }) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
-      setSubmitting(false);
-    }, 1000);
-  },
+    handleSubmit: (values, { props, setSubmitting }) => {
+      props.dispatch(login(values));
+      console.log(values);
+      // setTimeout(() => {
+      //   alert(JSON.stringify(values, null, 2));
+      //   setSubmitting(false);
+      // }, 1000);
+    },
 
-  displayName: "LoginForm",
-})(LoginForm);
+    displayName: "LoginForm",
+  })(LoginForm)
+);

@@ -69,7 +69,7 @@ const LoginForm = (props) => {
             />
           </Form.Item>
           <Form.Item>
-            <Button size="large" type="primary">
+            <Button onClick={handleSubmit} size="large" type="primary">
               Войти в аккаунт
             </Button>
           </Form.Item>

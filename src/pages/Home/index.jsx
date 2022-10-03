@@ -1,18 +1,27 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/userSlice";
 import {
   TeamOutlined,
   FormOutlined,
   EllipsisOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
 
 import { Status, ChatInput } from "components";
 import { Dialogs, Messages } from "containers";
 
 import "styles/layouts/_chat.scss";
+import "./Home.scss";
 
 const Home = () => {
+  const dispatch = useDispatch();
   return (
     <section className="home">
+      <LogoutOutlined
+        onClick={() => dispatch(logout())}
+        style={{ fontSize: "18px", cursor: "pointer" }}
+      />
       <div className="chat">
         <div className="chat__sidebar">
           <div className="chat__sidebar-header">

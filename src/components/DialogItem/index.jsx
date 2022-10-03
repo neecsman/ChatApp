@@ -15,18 +15,18 @@ const getMessageTime = (created_at) => {
   }
 };
 
-const DialogItem = ({ _id, user, text, created_at, unreaded, isMe }) => {
+const DialogItem = ({ id, partner, text, created_at, unreaded, isMe }) => {
   const dispatch = useDispatch();
 
   return (
     <div
       className={classNames("dialogs__item", {
-        "dialogs__item-online": user.isOnline,
+        "dialogs__item-online": partner,
       })}
-      onClick={() => dispatch(setCurrentDialog(_id))}
+      onClick={() => dispatch(setCurrentDialog(id))}
     >
       <div className="dialogs__item-avatar">
-        <Avatar user={user} />
+        <Avatar user={partner} />
         {/* {getAvatar(user.avatar)} */}
         {/* <img src={user.avatar} alt={`${user.fullname}`} /> */}
         {/* <img
@@ -36,7 +36,7 @@ const DialogItem = ({ _id, user, text, created_at, unreaded, isMe }) => {
       </div>
       <div className="dialogs__item-info">
         <div className="dialogs__item-info-top">
-          <p>{user.fullname}</p>
+          <p>{partner.fullname}</p>
           <span>{getMessageTime(created_at)}</span>
         </div>
         <div className="dialogs__item-info-bottom">

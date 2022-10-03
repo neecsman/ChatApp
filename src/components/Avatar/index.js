@@ -4,17 +4,20 @@ import { generateAvatarFromHash } from "utils/helpers";
 import "./Avatar.scss";
 
 const Avatar = ({ user }) => {
-  if (user.avatar) {
+  console.log(user);
+
+  if (user.avatarPath) {
     return (
       <img
         className="avatar"
-        src={user.avatar}
+        src={user.avatarPath}
         alt={`Avatar ${user.fullname}`}
       />
     );
   } else {
-    const { color, colorLighten } = generateAvatarFromHash(user._id);
+    const { color, colorLighten } = generateAvatarFromHash(user.id);
     const nameInitials = user.fullname[0].toUpperCase();
+
     return (
       <div
         style={{

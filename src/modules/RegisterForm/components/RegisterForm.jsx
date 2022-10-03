@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Input, Form } from "antd";
 import {
@@ -12,16 +13,20 @@ import { Button, Block } from "components";
 const RegisterForm = (props) => {
   const { values, touched, errors, handleChange, handleBlur, handleSubmit } =
     props;
-  const success = false;
+
+  const userData = useSelector((state) => state.user);
+  console.log(userData);
+
+  const { isAuth } = userData;
 
   return (
     <div>
       <div className="auth__top">
-        <h2>Регистрацият</h2>
+        <h2>Регистрация</h2>
         <p>Для входа в чат, вам нужно зарегистрироваться</p>
       </div>
       <Block>
-        {!success ? (
+        {!isAuth ? (
           <Form
             onSubmit={handleSubmit}
             name="normal_login"

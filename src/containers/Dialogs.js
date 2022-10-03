@@ -11,18 +11,19 @@ const Dialogs = ({ userId }) => {
   const [filtered, setFiltered] = useState([...items]);
 
   useEffect(() => {
-    if (!items.length) {
-      dispatch(fetchDialogs());
-    } else {
-      setFiltered([...items]);
-    }
+    dispatch(fetchDialogs());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setFiltered([...items]);
   }, [items]);
 
   const onChangeInput = (value) => {
     setFiltered(
       items.filter(
         (dialogs) =>
-          dialogs.user.fullname.toLowerCase().indexOf(value.toLowerCase()) >= 0
+          dialogs.partner.fullname.toLowerCase().indexOf(value.toLowerCase()) >=
+          0
       )
     );
     setValue(value);

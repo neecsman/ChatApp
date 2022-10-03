@@ -1,3 +1,11 @@
 .home {
   height: 100%;
+
+  .anticon-logout {
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    &:hover {
+      opacity: 1;
+    }
+  }
 }

@@ -6,6 +6,8 @@ import { Input, Empty } from "antd";
 const { Search } = Input;
 
 const Dialogs = ({ items, userId, onSearch, value }) => {
+  console.log(items);
+
   return (
     <div className="dialogs">
       <div className="chat__sidebar-search">
@@ -18,8 +20,8 @@ const Dialogs = ({ items, userId, onSearch, value }) => {
       {items.length ? (
         orderBy(items, ["created_at"], ["desc"]).map((item) => (
           <DialogItem
-            key={item._id}
-            isMe={item.user._id === userId}
+            key={item.id}
+            isMe={item.author.id === userId}
             {...item}
           />
         ))

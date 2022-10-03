@@ -1,14 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { dialogsAPI } from "utils/api";
+import { DialogsService } from "../utils/service";
 
 export const fetchDialogs = createAsyncThunk(
   "dialogs/fetchDialogs",
 
-  async () => {
-    let all = await dialogsAPI.getAll().then(({ data }) => {
-      return data;
-    });
-    return all;
+  async (id, { dispatch }) => {
+    let response = await DialogsService.getDialogs(id);
+    dispatch(setDialogs(response.data));
   }
 );
 
@@ -24,6 +22,9 @@ const dialogsSlice = createSlice({
     setCurrentDialog(state, action) {
       state.currentDialog = action.payload;
     },
+    setDialogs(state, action) {
+      state.dialogs = action.payload;
+    },
   },
   extraReducers: {
     [fetchDialogs.pending]: (state) => {
@@ -32,11 +33,10 @@ const dialogsSlice = createSlice({
     },
     [fetchDialogs.fulfilled]: (state, action) => {
       state.status = "resolved";
-      state.dialogs = action.payload;
     },
     [fetchDialogs.rejected]: () => {},
   },
 });
 
-export const { setCurrentDialog } = dialogsSlice.actions;
+export const { setCurrentDialog, setDialogs } = dialogsSlice.actions;
 export default dialogsSlice.reducer;

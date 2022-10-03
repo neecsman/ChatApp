@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 import { AuthService } from "../utils/service";
 
@@ -7,22 +8,27 @@ import { AuthService } from "../utils/service";
 export const login = createAsyncThunk(
   "user/login",
 
-  async (user) => {
+  async (user, { dispatch }) => {
     const response = await AuthService.login(user.email, user.password);
+    console.log("login");
+
     localStorage.setItem("token", response.data.accessToken);
+    dispatch(setUser(response.data.user));
   }
 );
 
 export const registration = createAsyncThunk(
   "user/registration",
 
-  async (user) => {
+  async (user, { dispatch }) => {
     const response = await AuthService.registration(
       user.email,
       user.password,
       user.fullname
     );
     localStorage.setItem("token", response.data.accessToken);
+    console.log(response.data.user);
+    dispatch(setUser(response.data.user));
   }
 );
 
@@ -35,6 +41,19 @@ export const logout = createAsyncThunk(
   }
 );
 
+export const checkAuth = createAsyncThunk(
+  "user/checkAuth",
+
+  async (_, { dispatch }) => {
+    const response = await axios.get("http://localhost:3000/user/refresh", {
+      withCredentials: true,
+    });
+
+    localStorage.setItem("token", response.data.accessToken);
+    dispatch(setUser(response.data.user));
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -44,26 +63,29 @@ const userSlice = createSlice({
     error: null,
   },
 
-  reducers: {},
+  reducers: {
+    setUser: (state, action) => {
+      state.user = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(login.pending, (state) => {
       state.status = "loading";
       state.error = null;
     });
 
-    builder.addCase(login.fulfilled, (state, action) => {
-      state.user = action.payload;
+    builder.addCase(login.fulfilled, (state) => {
       state.status = "resolved";
       state.isAuth = true;
     });
 
-    builder.addCase(registration.pending, (state) => {
+    builder.addCase(registration.pending, (state, action) => {
+      state.user = action.payload;
       state.status = "loading";
       state.error = null;
     });
 
-    builder.addCase(registration.fulfilled, (state, action) => {
-      state.user = action.payload;
+    builder.addCase(registration.fulfilled, (state) => {
       state.status = "resolved";
       state.isAuth = true;
     });
@@ -76,7 +98,17 @@ const userSlice = createSlice({
     builder.addCase(logout.fulfilled, (state) => {
       state.isAuth = false;
     });
+    builder.addCase(checkAuth.pending, (state) => {
+      state.status = "loading";
+      state.error = null;
+    });
+
+    builder.addCase(checkAuth.fulfilled, (state) => {
+      state.status = "resolved";
+      state.isAuth = true;
+    });
   },
 });
 
+export const { setUser } = userSlice.actions;
 export default userSlice.reducer;
