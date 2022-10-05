@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCurrentDialog } from "../../redux/dialogsSlice";
 import classNames from "classnames";
 import { format, isToday } from "date-fns";
@@ -15,32 +15,43 @@ const getMessageTime = (created_at) => {
   }
 };
 
-const DialogItem = ({ id, partner, text, created_at, unreaded, isMe }) => {
+const DialogItem = ({
+  id,
+  author,
+  partner,
+  text,
+  created_at,
+  unreaded,
+  isMe,
+  lastMessages,
+}) => {
   const dispatch = useDispatch();
+  const me = useSelector((state) => state.user.user.id);
+
+  let partnerItem;
+  if (me == partner.id) {
+    partnerItem = author;
+  } else {
+    partnerItem = partner;
+  }
 
   return (
     <div
       className={classNames("dialogs__item", {
-        "dialogs__item-online": partner,
+        "dialogs__item-online": partnerItem,
       })}
       onClick={() => dispatch(setCurrentDialog(id))}
     >
       <div className="dialogs__item-avatar">
-        <Avatar user={partner} />
-        {/* {getAvatar(user.avatar)} */}
-        {/* <img src={user.avatar} alt={`${user.fullname}`} /> */}
-        {/* <img
-          src="https://sun1-14.userapi.com/s/v1/if1/eEzYHZfhvKfU7DdcuQ802HRHjMU88BpdnirqnxsJh96U4HniroO5Tfe_FKLNIn07qPlF56Gt.jpg?size=100x100&quality=96&crop=0,0,300,300&ava=1"
-          alt=""
-        /> */}
+        <Avatar user={partnerItem} />
       </div>
       <div className="dialogs__item-info">
         <div className="dialogs__item-info-top">
-          <p>{partner.fullname}</p>
+          <p>{partnerItem.fullname}</p>
           <span>{getMessageTime(created_at)}</span>
         </div>
         <div className="dialogs__item-info-bottom">
-          <p>{text}</p>
+          <p>{lastMessages}</p>
           {isMe && <CheckedIcon isMe={true} isReaded={true} />}
           {unreaded > 0 && (
             <div className="dialogs__item-info-bottom-count">{unreaded}</div>

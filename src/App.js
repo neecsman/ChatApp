@@ -7,8 +7,8 @@ import { checkAuth } from "./redux/userSlice";
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-  const { isAuth } = user;
+  const users = useSelector((state) => state.user);
+  const { isAuth } = users;
 
   useEffect(() => {
     if (localStorage.getItem("token")) {

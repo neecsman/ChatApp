@@ -13,7 +13,7 @@ const Messages = ({ isLoading, items }) => {
       {isLoading && items ? (
         <Spin size="large" tip="Загружаю диалог..."></Spin>
       ) : items ? (
-        items.map((item) => <Message {...item} />)
+        items.map((item) => <Message key={item.id} {...item} />)
       ) : (
         <Empty description="Откройте диалог" />
       )}

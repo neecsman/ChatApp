@@ -1,14 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { messagesAPI } from "utils/api";
+import { MessagesService } from "../utils/service";
 
 export const fetchMessages = createAsyncThunk(
   "messages/fetchMessages",
   async (dialogId) => {
-    let all = await messagesAPI
-      .getMessageByDialogId(dialogId)
-      .then(({ data }) => {
+    let all = await MessagesService.getMessagesByDialogId(dialogId).then(
+      ({ data }) => {
         return data;
-      });
+      }
+    );
     return all;
   }
 );
@@ -16,8 +16,8 @@ export const fetchMessages = createAsyncThunk(
 const messageSlice = createSlice({
   name: "messages",
   initialState: {
-    messages: null,
-    isLoading: null,
+    messages: [],
+    isLoading: false,
     status: null,
     error: null,
   },

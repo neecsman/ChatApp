@@ -1,3 +1,9 @@
+.chat__dialogs-header-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .status {
   position: relative;
   font-weight: 300;
@@ -5,7 +11,7 @@
   &::before {
     display: block;
     position: absolute;
-    left: 25px;
+    left: -10px;
     top: 5px;
     content: "";
     width: 6px;

@@ -9,6 +9,7 @@ import play from "assets/img/play.svg";
 import pause from "assets/img/pause.svg";
 
 import "./Message.scss";
+import { useSelector } from "react-redux";
 
 const MessageAudio = ({ audioSrc }) => {
   const audioRef = useRef(null);
@@ -82,10 +83,11 @@ const Message = ({
   attachments,
   isTyping,
 }) => {
+  const { id } = useSelector((state) => state.user.user);
   return (
     <div
       className={classNames("message", {
-        "message--isme": isMe,
+        "message--isme": id == user.id,
         "message--is-typing": isTyping,
         "message--is-audio": audio,
         "message--image": attachments && attachments.length === 1,
