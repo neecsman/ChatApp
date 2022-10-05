@@ -3,14 +3,11 @@ import axios from "axios";
 
 import { AuthService } from "../utils/service";
 
-// Регистрация прошла успешно. Тоекн записался! Нужно сделать очистку формы и переход на стринцу подтверждения аккаунта!
-
 export const login = createAsyncThunk(
   "user/login",
 
   async (user, { dispatch }) => {
     const response = await AuthService.login(user.email, user.password);
-    console.log("login");
 
     localStorage.setItem("token", response.data.accessToken);
     dispatch(setUser(response.data.user));

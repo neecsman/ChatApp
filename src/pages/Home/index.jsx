@@ -1,47 +1,54 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { logout } from "../../redux/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+
 import {
-  TeamOutlined,
   EllipsisOutlined,
-  LogoutOutlined,
+  CommentOutlined,
+  UserOutlined,
+  FormOutlined,
+  SolutionOutlined,
 } from "@ant-design/icons";
 
-import { Status, ChatInput, Users } from "components";
-import { Dialogs, Messages } from "containers";
+import { Status, ChatInput } from "components";
+import { Messages } from "containers";
 
 import "styles/layouts/_chat.scss";
 import "./Home.scss";
+import { Avatar } from "../../components";
 
 const Home = () => {
-  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
 
   return (
     <section className="home">
-      <LogoutOutlined
-        onClick={() => dispatch(logout())}
-        style={{ fontSize: "18px", cursor: "pointer" }}
-      />
-
       <div className="chat">
         <div className="chat__sidebar">
           <div className="chat__sidebar-header">
             <div>
-              <TeamOutlined style={{ fontSize: "18px" }} />
+              <SolutionOutlined style={{ fontSize: "18px" }} />
               <span>Список диалогов</span>
             </div>
-            <Users />
+            <FormOutlined style={{ fontSize: "18px", cursor: "pointer" }} />
           </div>
-          <div className="chat__sidebar-dialogs">
-            <Dialogs userID={0} />
+          <div className="chat__sidebar-dialogs">{<Outlet />}</div>
+          <div className="chat__sidebar-footer">
+            <Link to="users">
+              <UserOutlined style={{ fontSize: "26px" }} />
+            </Link>
+            <Link to="/">
+              <CommentOutlined style={{ fontSize: "26px" }} />
+            </Link>
+            <Link to="account">
+              {" "}
+              <Avatar user={user} />
+            </Link>
           </div>
         </div>
         <div className="chat__dialogs">
           <div className="chat__dialogs-header">
             <div className="chat__dialogs-header-empty"></div>
-
             <Status online={true} />
-
             <EllipsisOutlined style={{ fontSize: "22px" }} />
           </div>
           <div className="chat__dialogs-messages">

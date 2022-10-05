@@ -15,7 +15,6 @@ const RegisterForm = (props) => {
     props;
 
   const userData = useSelector((state) => state.user);
-  console.log(userData);
 
   const { isAuth } = userData;
 

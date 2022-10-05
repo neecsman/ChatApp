@@ -9,3 +9,29 @@
     }
   }
 }
+
+.chat__sidebar-footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 20px;
+
+  .anticon {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  .avatar {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
