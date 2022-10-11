@@ -1,13 +1,11 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, Outlet } from "react-router-dom";
 
 import {
   EllipsisOutlined,
   CommentOutlined,
   UserOutlined,
-  FormOutlined,
-  SolutionOutlined,
 } from "@ant-design/icons";
 
 import { Status, ChatInput } from "components";
@@ -24,13 +22,6 @@ const Home = () => {
     <section className="home">
       <div className="chat">
         <div className="chat__sidebar">
-          <div className="chat__sidebar-header">
-            <div>
-              <SolutionOutlined style={{ fontSize: "18px" }} />
-              <span>Список диалогов</span>
-            </div>
-            <FormOutlined style={{ fontSize: "18px", cursor: "pointer" }} />
-          </div>
           <div className="chat__sidebar-dialogs">{<Outlet />}</div>
           <div className="chat__sidebar-footer">
             <Link to="users">

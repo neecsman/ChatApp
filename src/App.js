@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Route, Routes, useNavigate } from "react-router";
+import { Route, Routes } from "react-router";
+
 import { Auth, Home } from "pages";
-import Dialogs from "./containers/Dialogs";
-import { Profile, Users } from "./components";
+import { Dialogs, Users } from "./containers";
+import { Profile } from "./components";
 import { LoginForm, RegisterForm } from "modules";
 
 import { checkAuth } from "./redux/userSlice";
 
 function App() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const users = useSelector((state) => state.user);
   const { isAuth } = users;
 

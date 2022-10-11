@@ -19,7 +19,6 @@ const DialogItem = ({
   id,
   author,
   partner,
-  text,
   created_at,
   unreaded,
   isMe,
@@ -29,7 +28,7 @@ const DialogItem = ({
   const me = useSelector((state) => state.user.user.id);
 
   let partnerItem;
-  if (me == partner.id) {
+  if (me === partner.id) {
     partnerItem = author;
   } else {
     partnerItem = partner;
@@ -38,7 +37,7 @@ const DialogItem = ({
   return (
     <div
       className={classNames("dialogs__item", {
-        "dialogs__item-online": partnerItem,
+        "dialogs__item-online": false,
       })}
       onClick={() => dispatch(setCurrentDialog(id))}
     >

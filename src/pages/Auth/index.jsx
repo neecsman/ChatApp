@@ -1,6 +1,5 @@
 import React from "react";
-import { Route, Routes, Outlet } from "react-router";
-import { LoginForm, RegisterForm } from "modules";
+import { Outlet } from "react-router";
 
 import "./Auth.scss";
 

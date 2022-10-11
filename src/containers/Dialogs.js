@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { socket } from "../utils/api/socketAPI";
 import { fetchDialogs } from "../redux/dialogsSlice";
 import { Dialogs as BaseDialogs } from "components";
 
@@ -9,6 +10,10 @@ const Dialogs = ({ userId }) => {
 
   const [value, setValue] = useState("");
   const [filtered, setFiltered] = useState([...items]);
+
+  socket.on("test", (arg) => {
+    console.log(arg);
+  });
 
   useEffect(() => {
     dispatch(fetchDialogs());

@@ -13,7 +13,7 @@ const Messages = ({ userId }) => {
     if (dialogId) {
       dispatch(fetchMessages(dialogId));
     }
-  }, [dialogId]);
+  }, [dialogId, dispatch]);
 
   return <BaseMessages isLoading={isLoading} items={messages} />;
 };

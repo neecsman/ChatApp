@@ -19,9 +19,10 @@
   &__content {
     max-width: 440px;
     #{$self}__bubble {
+      border: 1px solid #ececec;
       padding: 15px;
-      background: $blue;
-      box-shadow: 0px 5px 5px rgba(54, 116, 255, 0.19);
+      background-color: #fff;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.022);
       border-radius: 0px 12px 12px 12px;
       margin-bottom: 8px;
     }
@@ -130,19 +131,18 @@
     }
 
     #{$self}__bubble {
-      background-color: #fff;
-      border: 1px solid #ececec;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.022);
       border-radius: 12px 0px 12px 12px;
+      background: $blue;
+      box-shadow: 0px 5px 5px rgba(54, 116, 255, 0.19);
 
       #{$self}__text {
-        color: $black;
+        color: #fff;
       }
     }
   }
 
   p {
-    color: #fff;
+    color: $black;
     line-height: 20px;
     margin-bottom: 0;
   }

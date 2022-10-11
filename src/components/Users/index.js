@@ -1,18 +1,26 @@
-import { useState, useEffect } from "react";
-import UserServuce from "../../utils/service/UserService";
 import { Avatar } from "../";
 import { useSelector } from "react-redux";
+import { Input } from "antd";
+import { FormOutlined, UserOutlined } from "@ant-design/icons";
 
-const Users = () => {
-  const [users, setUsers] = useState([]);
+const Users = ({ users, onSearch, value }) => {
+  const { Search } = Input;
   const me = useSelector((state) => state.user.user.id);
-
-  useEffect(() => {
-    UserServuce.getAll().then((users) => setUsers(users.data));
-  }, []);
 
   return (
     <>
+      <div className="chat__sidebar-header">
+        <UserOutlined style={{ fontSize: "18px" }} />
+        <span>Пользователи</span>
+        <FormOutlined style={{ color: "#fff" }} />
+      </div>
+      <div className="chat__sidebar-search">
+        <Search
+          placeholder="Поиск пользователя"
+          onChange={(e) => onSearch(e.target.value)}
+          value={value}
+        />
+      </div>
       {users &&
         users
           .filter((item) => item.id !== me)

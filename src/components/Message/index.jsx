@@ -87,7 +87,7 @@ const Message = ({
   return (
     <div
       className={classNames("message", {
-        "message--isme": id == user.id,
+        "message--isme": id === user.id,
         "message--is-typing": isTyping,
         "message--is-audio": audio,
         "message--image": attachments && attachments.length === 1,

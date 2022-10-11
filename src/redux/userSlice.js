@@ -1,7 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-import { AuthService } from "../utils/service";
+import { AuthService, UserService } from "../utils/service";
+
+export const getAll = createAsyncThunk(
+  "user/all",
+
+  async (_, { dispatch }) => {
+    const response = await UserService.getAll();
+    dispatch(setAllUsers(response.data));
+  }
+);
 
 export const login = createAsyncThunk(
   "user/login",
@@ -55,6 +64,7 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     user: {},
+    users: [],
     isAuth: false,
     status: null,
     error: null,
@@ -63,6 +73,10 @@ const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload;
+    },
+
+    setAllUsers: (state, action) => {
+      state.users = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -107,5 +121,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, setAllUsers } = userSlice.actions;
 export default userSlice.reducer;
